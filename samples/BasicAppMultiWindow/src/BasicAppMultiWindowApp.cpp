@@ -66,6 +66,9 @@ void BasicAppMultiWindow::keyDown( KeyEvent event )
     {
         createNewWindow();
     }
+    if( event.getCode() == KeyEvent::KEY_w ){
+        setFullScreen( !isFullScreen() );
+    }
 }
 
 void BasicAppMultiWindow::draw()

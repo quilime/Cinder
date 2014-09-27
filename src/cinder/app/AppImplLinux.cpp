@@ -205,6 +205,16 @@ void WindowImplLinux::setFullScreen( bool fullScreen, const app::FullScreenOptio
 
 void WindowImplLinux::toggleFullScreen( const app::FullScreenOptions &options )
 {
+    mFullScreen = ! mFullScreen;
+    if( mGLFWwindow ){
+        if( glfwGetWindowMonitor( mGLFWwindow ) ){
+            glfwSetWindowMonitor( mGLFWwindow, NULL, mWindowWidth, mWindowHeight );
+        }else{
+            GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+            const GLFWvidmode* mode = glfwGetVideoMode( monitor );
+            glfwSetWindowMonitor( mGLFWwindow, monitor, mode->width, mode->height );
+        }
+    }
 }
 
 void WindowImplLinux::getScreenSize( int clientWidth, int clientHeight, int *resultWidth, int *resultHeight )
