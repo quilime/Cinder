@@ -60,7 +60,7 @@
 	const std::string& applicationName = aApp->getSettings().getTitle();
 	[self setApplicationMenu:[NSString stringWithUTF8String: applicationName.c_str()]];
 	
-	[NSApp setDelegate:self];
+	[(NSApplication*)NSApp setDelegate:self];
 	
 	mApp = aApp;
 	mApp->privateSetImpl__( self );
@@ -97,8 +97,8 @@
 		winIt->mWindowRef->emitResize();
 	}	
 	
-	// make the first window the active window
-	[self setActiveWindow:[mWindows objectAtIndex:0]];
+	// when available, make the first window the active window
+	[self setActiveWindow:[mWindows firstObject]];
 	[self startAnimationTimer];
 }
 

@@ -213,6 +213,15 @@ void TW_CALL getterCallback( void *value, void *clientData )
 	*(T *)value = twc->mGetter();
 }
 
+// specialization of getterCallback for std::string (string must be copied using TwCopyStdStringToLibrary)
+template <>
+void TW_CALL getterCallback<string>( void *value, void *clientData )
+{
+	Accessors<string> *twc = reinterpret_cast<Accessors<string>*>( clientData );
+	string *destPtr = static_cast<string *>( value );
+	TwCopyStdStringToLibrary( *destPtr, twc->mGetter() );
+}
+
 } // anonymous namespace
 
 int initAntGl( weak_ptr<app::Window> winWeak )
@@ -394,6 +403,23 @@ void InterfaceGl::OptionsBase::setKeyIncr( const string &keyIncr )
 	mKeyIncr = keyIncr;
 }
 
+void InterfaceGl::OptionsBase::setKeyDecr( const string &keyDecr )
+{
+	assert( mParent );
+
+	string optionsStr = "keyDecr=" + keyDecr;
+	mParent->setOptions( getName(), optionsStr );
+	mKeyDecr = keyDecr;
+}
+
+void InterfaceGl::OptionsBase::setKey( const std::string &key )
+{
+	assert( mParent );
+
+	string optionsStr = "key=" + key;
+	mParent->setOptions( getName(), optionsStr );
+	mKey = key;
+}
 
 void InterfaceGl::OptionsBase::setGroup( const std::string &group )
 {
@@ -402,15 +428,6 @@ void InterfaceGl::OptionsBase::setGroup( const std::string &group )
 	string optionsStr = "group=`" + group + "`";
 	mParent->setOptions( getName(), optionsStr );
 	mGroup = group;
-}
-
-void InterfaceGl::OptionsBase::setKeyDecr( const string &keyDecr )
-{
-	assert( mParent );
-
-	string optionsStr = "keyDecr=" + keyDecr;
-	mParent->setOptions( getName(), optionsStr );
-	mKeyDecr = keyDecr;
 }
 
 void InterfaceGl::OptionsBase::setOptionsStr( const string &optionsStr )
@@ -501,11 +518,11 @@ void InterfaceGl::addParam( const std::string &name, const std::vector<std::stri
 	
 	TwEnumVal *ev = new TwEnumVal[enumNames.size()];
 	for( size_t v = 0; v < enumNames.size(); ++v ) {
-		ev[v].Value = v;
+		ev[v].Value = (int)v;
 		ev[v].Label = const_cast<char*>( enumNames[v].c_str() );
 	}
 
-	TwType evType = TwDefineEnum( (name + "EnumType").c_str(), ev, enumNames.size() );
+	TwType evType = TwDefineEnum( (name + "EnumType").c_str(), ev, (unsigned int)enumNames.size() );
 
 	if( readOnly )
 		TwAddVarRO( mBar.get(), name.c_str(), evType, param, optionsStr.c_str() );
@@ -550,8 +567,9 @@ void InterfaceGl::removeParam( const std::string &name )
 void InterfaceGl::clear()
 {
 	TwSetCurrentWindow( mTwWindowId );
-	
 	TwRemoveAllVars( mBar.get() );
+
+	mStoredCallbacks.clear();
 }
 
 void InterfaceGl::setOptions( const std::string &name, const std::string &optionsStr )
@@ -624,6 +642,8 @@ template void InterfaceGl::addParamCallbackImpl( const function<void( int32_t )>
 template void InterfaceGl::addParamCallbackImpl( const function<void( uint32_t )>	&setter, const function<uint32_t ()>	&getter, const Options<uint32_t>	&options );
 template void InterfaceGl::addParamCallbackImpl( const function<void( float )>		&setter, const function<float ()>		&getter, const Options<float>		&options );
 template void InterfaceGl::addParamCallbackImpl( const function<void( double )>		&setter, const function<double ()>		&getter, const Options<double>		&options );
+template void InterfaceGl::addParamCallbackImpl( const function<void( string )>		&setter, const function<string ()>		&getter, const Options<string>		&options );
+template void InterfaceGl::addParamCallbackImpl( const function<void( Color )>		&setter, const function<Color ()>		&getter, const Options<Color>		&options );
 template void InterfaceGl::addParamCallbackImpl( const function<void( ColorA )>		&setter, const function<ColorA ()>		&getter, const Options<ColorA>		&options );
 template void InterfaceGl::addParamCallbackImpl( const function<void( Quatf )>		&setter, const function<Quatf ()>		&getter, const Options<Quatf>		&options );
 template void InterfaceGl::addParamCallbackImpl( const function<void( Quatd )>		&setter, const function<Quatd ()>		&getter, const Options<Quatd>		&options );

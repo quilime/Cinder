@@ -22,6 +22,7 @@
 */
 
 #include "cinder/app/AppImplLinux.h"
+#include "cinder/Unicode.h"
 #include "cinder/app/App.h"
 #include "cinder/Utilities.h"
 #include "cinder/Display.h"
@@ -239,7 +240,7 @@ std::string	WindowImplLinux::getTitle() const
 
 void WindowImplLinux::setTitle( const std::string &title )
 {
-	std::wstring titleWide = toUtf16( title );
+	std::u16string titleWide = toUtf16( title );
 }
 
 void WindowImplLinux::setSize( const Vec2i &windowSize )

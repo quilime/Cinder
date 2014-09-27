@@ -39,7 +39,7 @@
 //  CINDER_VERSION / 100 % 1000 is the minor version
 //  CINDER_VERSION / 100000 is the major version
 #define CINDER_VERSION		806
-#define CINDER_VERSION_STR	"0.8.6dev"
+#define CINDER_VERSION_STR	"0.8.6"
 
 namespace cinder {
 using std::int8_t;
@@ -59,7 +59,7 @@ using std::uint64_t;
 			#define CINDER_MSW
 		#else
 			#define CINDER_WINRT
-			#if BOOST_VERSION != 105300
+			#if BOOST_VERSION != 105500
 				#error "Incorrect Boost version See include/winrt/boost/README.txt for more info."
 			#endif
 		#endif
