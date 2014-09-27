@@ -9,6 +9,7 @@ void BasicApp::mouseUp( MouseEvent event )
 
 void BasicApp::setup()
 {
+    setFullScreen( true );
     DataSourceRef dataAssetRef = loadAsset("cinder.jpg");
 
     try{
@@ -62,7 +63,10 @@ void BasicApp::mouseDrag( MouseEvent event )
 
 void BasicApp::keyDown( KeyEvent event )
 {
-    //std::cout << " KEY DOWN " << std::endl;
+    if( event.getCode() == KeyEvent::KEY_f ){
+        setFullScreen( !isFullScreen() );
+    }
+    std::cout << " KEY DOWN " <<  getWindowBounds() << std::endl;
 }
 
 void BasicApp::draw()
