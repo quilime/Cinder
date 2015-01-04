@@ -34,14 +34,14 @@ set ( 	srcsLibTess2	${CINDER_ROOT}/src/libtess2/bucketalloc.c
 )
 
 set (	srcsCinder 	${CINDER_ROOT}/src/cinder/app/AppBasic.cpp
-		   	${CINDER_ROOT}/src/cinder/app/App.cpp
-		   	${CINDER_ROOT}/src/cinder/app/Window.cpp
-		   	${CINDER_ROOT}/src/cinder/app/Renderer.cpp
-		   	${CINDER_ROOT}/src/cinder/app/KeyEvent.cpp
-		   	${CINDER_ROOT}/src/cinder/app/AppImplLinuxBasic.cpp
-		   	${CINDER_ROOT}/src/cinder/app/AppImplLinux.cpp
-		   	${CINDER_ROOT}/src/cinder/app/AppImplLinuxRendererGlx.cpp
-		   	${CINDER_ROOT}/src/cinder/Area.cpp
+			${CINDER_ROOT}/src/cinder/app/App.cpp
+			${CINDER_ROOT}/src/cinder/app/Window.cpp
+			${CINDER_ROOT}/src/cinder/app/Renderer.cpp
+			${CINDER_ROOT}/src/cinder/app/KeyEvent.cpp
+			${CINDER_ROOT}/src/cinder/app/AppImplLinuxBasic.cpp
+			${CINDER_ROOT}/src/cinder/app/AppImplLinux.cpp
+			${CINDER_ROOT}/src/cinder/app/AppImplLinuxRendererGlx.cpp
+			${CINDER_ROOT}/src/cinder/Area.cpp
 			${CINDER_ROOT}/src/cinder/AxisAlignedBox.cpp
 			${CINDER_ROOT}/src/cinder/BandedMatrix.cpp
 			${CINDER_ROOT}/src/cinder/Base64.cpp
@@ -111,6 +111,6 @@ set (	srcsCinder 	${CINDER_ROOT}/src/cinder/app/AppBasic.cpp
 			${CINDER_ROOT}/src/cinder/ip/Resize.cpp
 			${CINDER_ROOT}/src/cinder/ip/Trim.cpp
 			${CINDER_ROOT}/src/cinder/svg/Svg.cpp
-            ${CINDER_ROOT}/src/cinder/ImageSourceFileFreeImage.cpp
+      ${CINDER_ROOT}/src/cinder/ImageSourceFileFreeImage.cpp
 #			${CINDER_ROOT}/src/cinder/params/Params.cpp
    )
