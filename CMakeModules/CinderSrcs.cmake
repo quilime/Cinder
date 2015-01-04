@@ -11,9 +11,9 @@ set ( srcsAntTweakBar #	${CINDER_ROOT}/src/AntTweakBar/LoadOGLCore.cpp
 )
 
 
-set ( srcsJsonCpp 	#${CINDER_ROOT}/src/jsoncpp/json_reader.cpp
-			#${CINDER_ROOT}/src/jsoncpp/json_value.cpp
-			#${CINDER_ROOT}/src/jsoncpp/json_writer.cpp
+set ( srcsJsonCpp 	${CINDER_ROOT}/src/jsoncpp/json_reader.cpp
+			${CINDER_ROOT}/src/jsoncpp/json_value.cpp
+			${CINDER_ROOT}/src/jsoncpp/json_writer.cpp
 )
 
 			
@@ -86,7 +86,7 @@ set (	srcsCinder 	${CINDER_ROOT}/src/cinder/app/AppBasic.cpp
 			${CINDER_ROOT}/src/cinder/Utilities.cpp
 			${CINDER_ROOT}/src/cinder/Url.cpp
 			${CINDER_ROOT}/src/cinder/Display.cpp
-#			${CINDER_ROOT}/src/cinder/Json.cpp
+			${CINDER_ROOT}/src/cinder/Json.cpp
 			${CINDER_ROOT}/src/cinder/gl/DisplayList.cpp
 			${CINDER_ROOT}/src/cinder/gl/GLee.c
 			${CINDER_ROOT}/src/cinder/gl/Material.cpp
