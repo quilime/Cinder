@@ -30,7 +30,8 @@
 	#include <objc/objc-auto.h>
 #endif
 
-#if defined( CINDER_WINRT )
+#if 1
+// #if defined( CINDER_WINRT )
 	#include <thread>
 	#include <mutex>
 	#include <condition_variable>
